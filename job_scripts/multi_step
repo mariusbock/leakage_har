@@ -1,0 +1,46 @@
+python LeakageAVG_local.py --config configs/leakage/wear_loso_deep.yaml --num_data_points 100 --num_data_per_local_update_step 100 --num_local_updates 5 --trained --neptune --sampling shuffle 
+python LeakageAVG_local.py --config configs/leakage/wear_loso_deep.yaml --num_data_points 100 --num_data_per_local_update_step 100 --num_local_updates 5 --neptune --sampling shuffle 
+python LeakageAVG_local.py --config configs/leakage/wetlab_loso_deep.yaml --num_data_points 100 --num_data_per_local_update_step 100 --num_local_updates 5 --trained --neptune --sampling shuffle 
+python LeakageAVG_local.py --config configs/leakage/wetlab_loso_deep.yaml --num_data_points 100 --num_data_per_local_update_step 100 --num_local_updates 5 --neptune --sampling shuffle 
+
+python LeakageAVG_local.py --config configs/leakage/wear_loso_deep.yaml --num_data_points 100 --num_data_per_local_update_step 100 --num_local_updates 5 --trained --neptune --sampling sequential 
+python LeakageAVG_local.py --config configs/leakage/wear_loso_deep.yaml --num_data_points 100 --num_data_per_local_update_step 100 --num_local_updates 5 --neptune --sampling sequential 
+python LeakageAVG_local.py --config configs/leakage/wetlab_loso_deep.yaml --num_data_points 100 --num_data_per_local_update_step 100 --num_local_updates 5 --trained --neptune --sampling sequential 
+python LeakageAVG_local.py --config configs/leakage/wetlab_loso_deep.yaml --num_data_points 100 --num_data_per_local_update_step 100 --num_local_updates 5 --neptune --sampling sequential 
+
+python LeakageAVG_local.py --config configs/leakage/wear_loso_deep.yaml --num_data_points 100 --num_data_per_local_update_step 20 --num_local_updates 5 --trained --neptune --sampling balanced 
+python LeakageAVG_local.py --config configs/leakage/wear_loso_deep.yaml --num_data_points 100 --num_data_per_local_update_step 20 --num_local_updates 5 --neptune --sampling balanced 
+python LeakageAVG_local.py --config configs/leakage/wetlab_loso_deep.yaml --num_data_points 100 --num_data_per_local_update_step 20 --num_local_updates 5 --trained --neptune --sampling balanced 
+python LeakageAVG_local.py --config configs/leakage/wetlab_loso_deep.yaml --num_data_points 100 --num_data_per_local_update_step 20 --num_local_updates 5 --neptune --sampling balanced 
+
+
+python LeakageAVG_local.py --config configs/leakage/wear_loso_deep.yaml --num_data_points 100 --num_data_per_local_update_step 100 --num_local_updates 5 --trained --neptune --sampling shuffle 
+python LeakageAVG_local.py --config configs/leakage/wear_loso_deep.yaml --num_data_points 100 --num_data_per_local_update_step 100 --num_local_updates 5 --neptune --sampling shuffle 
+python LeakageAVG_local.py --config configs/leakage/wetlab_loso_deep.yaml --num_data_points 100 --num_data_per_local_update_step 100 --num_local_updates 5 --trained --neptune --sampling shuffle 
+python LeakageAVG_local.py --config configs/leakage/wetlab_loso_deep.yaml --num_data_points 100 --num_data_per_local_update_step 100 --num_local_updates 5 --neptune --sampling shuffle 
+
+python LeakageAVG_local.py --config configs/leakage/wear_loso_deep.yaml --num_data_points 100 --num_data_per_local_update_step 50 --num_local_updates 2 --trained --neptune --sampling sequential 
+python LeakageAVG_local.py --config configs/leakage/wear_loso_deep.yaml --num_data_points 100 --num_data_per_local_update_step 50 --num_local_updates 2 --neptune --sampling sequential 
+python LeakageAVG_local.py --config configs/leakage/wetlab_loso_deep.yaml --num_data_points 100 --num_data_per_local_update_step 50 --num_local_updates 2 --trained --neptune --sampling sequential 
+python LeakageAVG_local.py --config configs/leakage/wetlab_loso_deep.yaml --num_data_points 100 --num_data_per_local_update_step 50 --num_local_updates 2 --neptune --sampling sequential 
+
+python LeakageAVG_local.py --config configs/leakage/wear_loso_deep.yaml --num_data_points 100 --num_data_per_local_update_step 50 --num_local_updates 2 --trained --neptune --sampling balanced 
+python LeakageAVG_local.py --config configs/leakage/wear_loso_deep.yaml --num_data_points 100 --num_data_per_local_update_step 50 --num_local_updates 2 --neptune --sampling balanced 
+python LeakageAVG_local.py --config configs/leakage/wetlab_loso_deep.yaml --num_data_points 100 --num_data_per_local_update_step 50 --num_local_updates 2 --trained --neptune --sampling balanced 
+python LeakageAVG_local.py --config configs/leakage/wetlab_loso_deep.yaml --num_data_points 100 --num_data_per_local_update_step 50 --num_local_updates 2 --neptune --sampling balanced 
+
+
+python LeakageAVG_local.py --config configs/leakage/wear_loso_deep.yaml --num_data_points 500 --num_data_per_local_update_step 100 --num_local_updates 5 --trained --neptune --sampling shuffle 
+python LeakageAVG_local.py --config configs/leakage/wear_loso_deep.yaml --num_data_points 500 --num_data_per_local_update_step 100 --num_local_updates 5 --neptune --sampling shuffle 
+python LeakageAVG_local.py --config configs/leakage/wetlab_loso_deep.yaml --num_data_points 500 --num_data_per_local_update_step 100 --num_local_updates 5 --trained --neptune --sampling shuffle 
+python LeakageAVG_local.py --config configs/leakage/wetlab_loso_deep.yaml --num_data_points 500 --num_data_per_local_update_step 100 --num_local_updates 5 --neptune --sampling shuffle 
+
+python LeakageAVG_local.py --config configs/leakage/wear_loso_deep.yaml --num_data_points 500 --num_data_per_local_update_step 100 --num_local_updates 5 --trained --neptune --sampling sequential 
+python LeakageAVG_local.py --config configs/leakage/wear_loso_deep.yaml --num_data_points 500 --num_data_per_local_update_step 100 --num_local_updates 5 --neptune --sampling sequential 
+python LeakageAVG_local.py --config configs/leakage/wetlab_loso_deep.yaml --num_data_points 500 --num_data_per_local_update_step 100 --num_local_updates 5 --trained --neptune --sampling sequential 
+python LeakageAVG_local.py --config configs/leakage/wetlab_loso_deep.yaml --num_data_points 500 --num_data_per_local_update_step 100 --num_local_updates 5 --neptune --sampling sequential 
+
+python LeakageAVG_local.py --config configs/leakage/wear_loso_deep.yaml --num_data_points 500 --num_data_per_local_update_step 100 --num_local_updates 5 --trained --neptune --sampling balanced 
+python LeakageAVG_local.py --config configs/leakage/wear_loso_deep.yaml --num_data_points 500 --num_data_per_local_update_step 100 --num_local_updates 5 --neptune --sampling balanced 
+python LeakageAVG_local.py --config configs/leakage/wetlab_loso_deep.yaml --num_data_points 500 --num_data_per_local_update_step 100 --num_local_updates 5 --trained --neptune --sampling balanced 
+python LeakageAVG_local.py --config configs/leakage/wetlab_loso_deep.yaml --num_data_points 500 --num_data_per_local_update_step 100 --num_local_updates 5 --neptune --sampling balanced 

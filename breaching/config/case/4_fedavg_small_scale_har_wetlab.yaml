@@ -1,0 +1,12 @@
+name: fedavg_small_scale
+
+defaults:
+  - data: Wetlab # Wear
+  - impl: default
+  - server: honest-but-curious
+  - user: local_updates
+  - _self_
+model: DeepConvLSTM
+
+# Server and user:
+num_queries: 1

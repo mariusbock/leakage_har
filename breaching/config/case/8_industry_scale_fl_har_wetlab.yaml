@@ -1,0 +1,12 @@
+name: industry_scale_fl
+
+defaults:
+  - data: Wetlab # Wetlab
+  - impl: default
+  - server: honest-but-curious
+  - user: multiuser_aggregate
+  - _self_
+model: DeepConvLSTM
+
+# Server and user:
+num_queries: 1
