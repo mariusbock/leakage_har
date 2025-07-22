@@ -65,7 +65,7 @@ class Leakage():
     def main(self, args):
         if args.neptune:
             run = neptune.init_run(
-            project="wasedo/leakage",
+            project="wasedo/label-leakage",
             api_token="eyJhcGlfYWRkcmVzcyI6Imh0dHBzOi8vYXBwLm5lcHR1bmUuYWkiLCJhcGlfdXJsIjoiaHR0cHM6Ly9hcHAubmVwdHVuZS5haSIsImFwaV9rZXkiOiJiNzYwZjBiMi0xMzEwLTQyMGEtOTFkMC01M2JjMGQzNzc0OTUifQ==",
             )
         else:
@@ -281,6 +281,9 @@ class Leakage():
                 batchLabels_all = []
                 mean_ln = 0
                 mean_le = 0
+                all_per_class = np.array([0] * (config['dataset']['num_classes'] + 1))
+                all_per_class_wrong = np.array([0] * (config['dataset']['num_classes'] + 1))
+
                 for i, (inputs, targets) in enumerate(loader, 0):
                     if 'deepconvlstm' in config['name']:
                         val_data = inputs
@@ -385,7 +388,24 @@ class Leakage():
                     else: 
                         appendData.to_csv(os.path.join(log_dir, 'labels_' + str(config['name']) + '_' + str(label_strat) + '.csv'), mode='a', header=False, index=False, float_format='%.4f')
                         appendGradient.to_csv(os.path.join(log_dir, 'gradients_' + str(config['name']) + '_' + str(label_strat) + '.csv'), mode='a', header=False, index=False, float_format='%.4f')
-                        
+                    
+                    # Calculate per-class LnAcc
+                    per_class_correct = np.array([0] * (config['dataset']['num_classes'] + 1))
+                    per_class_wrong = np.array([0] * (config['dataset']['num_classes'] + 1))
+                    per_class_predicted = recovered_labels.clone()
+
+                    for label in batchLabels:
+                        if label in per_class_predicted:
+                            per_class_correct[label] += 1
+                            index = np.where(per_class_predicted == label)[0][0]
+
+                            # Delete the first occurrence
+                            per_class_predicted = np.delete(per_class_predicted, index)
+                        else:
+                            per_class_wrong[label] += 1    
+                    per_class_all = per_class_correct + per_class_wrong
+                    
+                    # Calculate leAcc and LnAcc
                     correct = 0
                     wrong = 0
                     predicted_labels = recovered_labels.clone()
@@ -399,7 +419,9 @@ class Leakage():
                             predicted_labels = np.delete(predicted_labels, index)
                         else:
                             wrong +=1
-                            
+                    
+                    lnAcc = (batchLabels.size()[0] - wrong) / batchLabels.size()[0]
+
                     # Calculate Label Leakage Accuracy for label existence
                     unique_labelsGT = torch.unique(batchLabels)
                     unique_labelsPD = torch.unique(recovered_labels)
@@ -410,15 +432,15 @@ class Leakage():
                             leAcc += 1
                         elif label not in unique_labelsGT:
                             leAccWrong += 1
+                            
                     leAcc = leAcc / unique_labelsGT.size()[0] # Label Existence Accuracy
                     leAccWrong = leAccWrong / unique_labelsPD.size()[0] # Label Existence Prediction that were predicted, but not actually in the batch
                                         
-                    lnAcc = (batchLabels.size()[0] - wrong) / batchLabels.size()[0]
-
                     block2 = ''
                     block2 += 'Correct Labels: ' + str(correct) + '\n' 
                     block2 += 'Wrong Labels: ' + str(wrong) + '\n' 
                     block2 += 'LnAcc: {:.2f}'.format(lnAcc * 100) + '\n'
+                    block2 += 'LeAcc: {:.2f}'.format(leAcc * 100) + '\n'
                     block2 += '\n'
 
                     block1 = '\nLABEL LEAKAGE RESULTS:'
@@ -431,15 +453,17 @@ class Leakage():
                         
                     mean_ln += lnAcc
                     mean_le += leAcc
-                    
+                    all_per_class_wrong += per_class_wrong
+                    all_per_class += per_class_all
+
                     recovered_labels_all.append(recovered_labels)
                     batchLabels_all.append(batchLabels) 
                     
                 batchLabels_all = torch.cat(batchLabels_all)
                 recovered_labels_all = torch.cat(recovered_labels_all)
                 conf_mat = confusion_matrix(batchLabels_all, recovered_labels_all, normalize='true', labels=range(len(config['labels'])))
-                classAvg_acc = conf_mat.diagonal().mean()
-                
+                #classAvg_acc = conf_mat.diagonal().mean()
+
                 # save final raw confusion matrix
                 _, ax = plt.subplots(figsize=(15, 15), layout="constrained")
                 ax.set_title('Confusion Matrix: ' + str(label_strat) + ' ' + split_name)
@@ -452,7 +476,7 @@ class Leakage():
                 if run is not None:
                     run['label_attack' + '/' + str(label_strat) + '/' + split_name +'/final_lnAcc'] = mean_ln / len(loader)
                     run['label_attack' + '/' + str(label_strat) + '/' + split_name +'/final_leAcc'] = mean_le / len(loader)
-                    run['label_attack' + '/' + str(label_strat) + '/' + split_name +'/final_classAvgAcc'] = classAvg_acc
+                    run['label_attack' + '/' + str(label_strat) + '/' + split_name +'/final_classAvgAcc'] = np.nanmean((all_per_class - all_per_class_wrong) / all_per_class)
     
 if __name__ == '__main__':
     parser = argparse.ArgumentParser()
@@ -465,7 +489,7 @@ if __name__ == '__main__':
     
     # Leakage arguments
     parser.add_argument('--attack', default='_default_optimization_attack', type=str)
-    parser.add_argument('--label_strat_array', nargs='+', default=['wainakh-simple', 'wainakh-whitebox', 'ebi', 'iLRG', 'llbgAVG', 'gcd'], type=str)
+    parser.add_argument('--label_strat_array', nargs='+', default=['wainakh-simple', 'wainakh-whitebox', 'ebi', 'iLRG', 'llbgAVG'], type=str)
     parser.add_argument('--resume', default='', type=str)
     parser.add_argument('--batch_size', default=100, type=int)
     parser.add_argument('--trained', action='store_true', default=False)

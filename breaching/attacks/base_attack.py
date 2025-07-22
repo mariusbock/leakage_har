@@ -667,10 +667,10 @@ class _BaseAttacker:
            
             labels = torch.tensor([], dtype=torch.long)
             for i, count in enumerate(res):
-                if len(labels) + count > 100:
-                    count = 100 - len(labels)
+                if len(labels) + count > num_data_points:
+                    count = num_data_points - len(labels)
                 labels = torch.cat((labels, torch.full((count,), i, dtype=torch.long)))
-                if len(labels) >= 100:
+                if len(labels) >= num_data_points:
                     break
             #return labels
            #return res, mod_res

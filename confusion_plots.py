@@ -20,18 +20,28 @@ warnings.simplefilter(action='ignore', category=FutureWarning)
 steps = ['single_step', 'multi_step']
 sampling_methods = ['shuffling', 'sequential', 'balanced']
 datasets = ['wear', 'wetlab']
-attacks = ['wainakh-simple', 'wainakh-whitebox', 'ebi', 'iLRG', 'llbgAVG', 'gcd']
+attacks = ['wainakh-simple', 'wainakh-whitebox', 'ebi', 'iLRG', 'llbgAVG']
 states = ['untrained', 'trained']
 models = ['deepconvlstm', 'tinyhar']
-clip_level = 1.5
-noise_level = 0.1
+clip_level = 0.0
+noise_level = 0.0
 
 def main(args):
     for step in steps:
         if step == 'single_step':
-            types = ['no_ldp', 'noise_ldp', 'clipping_ldp', 'clipping_noise_ldp']
+            if noise_level == 0.0 and clip_level == 0.0:
+                types = ['no_ldp']
+            elif noise_level > 0.0 and clip_level == 0.0:
+                types = ['noise_ldp']
+            elif noise_level == 0.0 and clip_level > 0.0:
+                types = ['clipping_ldp']
+            elif noise_level > 0.0 and clip_level > 0.0:
+                types = ['clipping_noise_ldp']
         elif step == 'multi_step':
-            types = ['N_100_S_5', 'N_100_S_2', 'N_500_S_5']
+            if noise_level == 0.0 and clip_level == 0.0:
+                types = ['N_100_S_5', 'N_100_S_2', 'N_500_S_5']
+            else:
+                continue
 
         for type in types:
             for sampling in sampling_methods:
@@ -41,7 +51,7 @@ def main(args):
                             for model in models:
                                 if type == 'no_ldp':
                                     if state == 'untrained':
-                                        path = '/{}/{}/{}/{}/{}/{}/seed_1/labels_{}_{}.csv'.format(dataset, model, state, step, type, sampling, model, attack)
+                                        path = os.path.join(args.experiment_folder, '{}/{}/{}/{}/{}/{}/seed_1/labels_{}_{}.csv'.format(dataset, model, state, step, type, sampling, model, attack))
                                     elif state == 'trained':
                                         path = os.path.join(args.experiment_folder, '{}/{}/{}/{}/{}/{}/seed_1/labelsT_{}_{}.csv'.format(dataset, model, state, step, type, sampling, model, attack))
                                 elif type == 'noise_ldp':
@@ -50,7 +60,9 @@ def main(args):
                                     elif state == 'trained':
                                         path = os.path.join(args.experiment_folder, '{}/{}/{}/{}/{}/{}/{}/seed_1/labelsT_{}_{}.csv'.format(dataset, model, state, step, type, sampling, noise_level, model, attack))
                                 elif type == 'clipping_ldp':
-                                    if state == 'untrained':
+                                    if clip_level == 0.0:
+                                        continue
+                                    elif state == 'untrained':
                                         path = os.path.join(args.experiment_folder, '{}/{}/{}/{}/{}/{}/{}/seed_1/labels_{}_{}.csv'.format(dataset, model, state, step, type, sampling, clip_level, model, attack))
                                     elif state == 'trained':   
                                         path = os.path.join(args.experiment_folder, '{}/{}/{}/{}/{}/{}/{}/seed_1/labelsT_{}_{}.csv'.format(dataset, model, state, step, type, sampling, clip_level, model, attack))
@@ -126,21 +138,16 @@ def main(args):
                                 ax.set_yticklabels(label_dict.keys(), fontsize=16)
                                 plt.xticks(rotation=90)
                                 plt.yticks(rotation=0)
-                                """
                                 ax.set_xticks([])
                                 ax.set_yticks([])
-                                """
-                                # save the figure
-                                # check if the directory exists, if not create it
-                                if not os.path.exists(f'confusion_matrices/{dataset}/{model}/{step}/{attack}'):
-                                    os.makedirs(f'confusion_matrices/{dataset}/{model}/{step}/{attack}')
+                                
                                 
                                 if type == 'no_ldp':
                                     file_name = f'{sampling}_{state}_{type}.png'
                                 elif type == 'noise_ldp':
                                     file_name = f'{sampling}_{state}_{type}_{noise_level}.png'
                                 elif type == 'clipping_ldp':
-                                    file_name = f'{sampling}_{state}_{type}_{noise_level}.png'
+                                    file_name = f'{sampling}_{state}_{type}_{clip_level}.png'
                                 elif type == 'clipping_noise_ldp':
                                     file_name = f'{sampling}_{state}_{type}_{noise_level}_{clip_level}.png'
                                 elif type == 'N_100_S_5':
@@ -150,14 +157,16 @@ def main(args):
                                 elif type == 'N_500_S_5':
                                     file_name = f'{sampling}_{state}_{type}.png'
                         
-                                save_path = f'confusion_matrices/{dataset}/{model}/{step}/{attack}'
+                                save_path = f'{args.save_folder}/{dataset}/{model}/{step}/{attack}'
+                                if not os.path.exists(save_path):
+                                    os.makedirs(save_path)
                                 plt.savefig(os.path.join(save_path, file_name), dpi=300)
                                 plt.close()
                             
 if __name__ == '__main__':
     parser = argparse.ArgumentParser()
-    parser.add_argument('--experiment_folder', default='./experimental_results/raw')
-    parser.add_argument('--save_folder', default='./experimental_results/confusion_matrices')
+    parser.add_argument('--experiment_folder', default='experimental_results/raw')
+    parser.add_argument('--save_folder', default='experimental_results/confusion_matrices')
     
     args = parser.parse_args()
     

@@ -1,26 +1,26 @@
-python Leakage.py --config configs/leakage/wear_loso_deep.yaml --sampling shuffle --batch_size 100 --trained --neptune
-python Leakage.py --config configs/leakage/wetlab_loso_deep.yaml --sampling shuffle --batch_size 100 --trained --neptune
-python Leakage.py --config configs/leakage/wear_loso_deep.yaml --sampling shuffle --batch_size 100 --neptune 
-python Leakage.py --config configs/leakage/wetlab_loso_deep.yaml --sampling shuffle --batch_size 100 --neptune 
-python Leakage.py --config configs/leakage/wear_loso_tiny.yaml --sampling shuffle --batch_size 100 --trained --neptune
-python Leakage.py --config configs/leakage/wetlab_loso_tiny.yaml --sampling shuffle --batch_size 100 --trained --neptune
-python Leakage.py --config configs/leakage/wear_loso_tiny.yaml --sampling shuffle --batch_size 100 --neptune 
-python Leakage.py --config configs/leakage/wetlab_loso_tiny.yaml --sampling shuffle --batch_size 100 --neptune 
+python single_step_leakage.py --config configs/leakage/wear_loso_deep.yaml --sampling shuffle --batch_size 100 --trained --neptune
+python single_step_leakage.py --config configs/leakage/wetlab_loso_deep.yaml --sampling shuffle --batch_size 100 --trained --neptune
+python single_step_leakage.py --config configs/leakage/wear_loso_deep.yaml --sampling shuffle --batch_size 100 --neptune 
+python single_step_leakage.py --config configs/leakage/wetlab_loso_deep.yaml --sampling shuffle --batch_size 100 --neptune 
+python single_step_leakage.py --config configs/leakage/wear_loso_tiny.yaml --sampling shuffle --batch_size 100 --trained --neptune
+python single_step_leakage.py --config configs/leakage/wetlab_loso_tiny.yaml --sampling shuffle --batch_size 100 --trained --neptune
+python single_step_leakage.py --config configs/leakage/wear_loso_tiny.yaml --sampling shuffle --batch_size 100 --neptune 
+python single_step_leakage.py --config configs/leakage/wetlab_loso_tiny.yaml --sampling shuffle --batch_size 100 --neptune 
 
-python Leakage.py --config configs/leakage/wear_loso_deep.yaml --sampling sequential --batch_size 100 --trained --neptune
-python Leakage.py --config configs/leakage/wetlab_loso_deep.yaml --sampling sequential --batch_size 100 --trained --neptune
-python Leakage.py --config configs/leakage/wear_loso_deep.yaml --sampling sequential --batch_size 100 --neptune 
-python Leakage.py --config configs/leakage/wetlab_loso_deep.yaml --sampling sequential --batch_size 100 --neptune 
-python Leakage.py --config configs/leakage/wear_loso_tiny.yaml --sampling sequential --batch_size 100 --trained --neptune
-python Leakage.py --config configs/leakage/wetlab_loso_tiny.yaml --sampling sequential --batch_size 100 --trained --neptune
-python Leakage.py --config configs/leakage/wear_loso_tiny.yaml --sampling sequential --batch_size 100 --neptune 
-python Leakage.py --config configs/leakage/wetlab_loso_tiny.yaml --sampling sequential --batch_size 100 --neptune 
+python single_step_leakage.py --config configs/leakage/wear_loso_deep.yaml --sampling sequential --batch_size 100 --trained --neptune
+python single_step_leakage.py --config configs/leakage/wetlab_loso_deep.yaml --sampling sequential --batch_size 100 --trained --neptune
+python single_step_leakage.py --config configs/leakage/wear_loso_deep.yaml --sampling sequential --batch_size 100 --neptune 
+python single_step_leakage.py --config configs/leakage/wetlab_loso_deep.yaml --sampling sequential --batch_size 100 --neptune 
+python single_step_leakage.py --config configs/leakage/wear_loso_tiny.yaml --sampling sequential --batch_size 100 --trained --neptune
+python single_step_leakage.py --config configs/leakage/wetlab_loso_tiny.yaml --sampling sequential --batch_size 100 --trained --neptune
+python single_step_leakage.py --config configs/leakage/wear_loso_tiny.yaml --sampling sequential --batch_size 100 --neptune 
+python single_step_leakage.py --config configs/leakage/wetlab_loso_tiny.yaml --sampling sequential --batch_size 100 --neptune 
 
-python Leakage.py --config configs/leakage/wear_loso_deep.yaml --sampling balanced --batch_size 100 --trained --neptune
-python Leakage.py --config configs/leakage/wetlab_loso_deep.yaml --sampling balanced --batch_size 100 --trained --neptune
-python Leakage.py --config configs/leakage/wear_loso_deep.yaml --sampling balanced --batch_size 100 --neptune 
-python Leakage.py --config configs/leakage/wetlab_loso_deep.yaml --sampling balanced --batch_size 100 --neptune 
-python Leakage.py --config configs/leakage/wear_loso_tiny.yaml --sampling balanced --batch_size 100 --trained --neptune
-python Leakage.py --config configs/leakage/wetlab_loso_tiny.yaml --sampling balanced --batch_size 100 --trained --neptune
-python Leakage.py --config configs/leakage/wear_loso_tiny.yaml --sampling balanced --batch_size 100 --neptune 
-python Leakage.py --config configs/leakage/wetlab_loso_tiny.yaml --sampling balanced --batch_size 100 --neptune 
+python single_step_leakage.py --config configs/leakage/wear_loso_deep.yaml --sampling balanced --batch_size 100 --trained --neptune
+python single_step_leakage.py --config configs/leakage/wetlab_loso_deep.yaml --sampling balanced --batch_size 100 --trained --neptune
+python single_step_leakage.py --config configs/leakage/wear_loso_deep.yaml --sampling balanced --batch_size 100 --neptune 
+python single_step_leakage.py --config configs/leakage/wetlab_loso_deep.yaml --sampling balanced --batch_size 100 --neptune 
+python single_step_leakage.py --config configs/leakage/wear_loso_tiny.yaml --sampling balanced --batch_size 100 --trained --neptune
+python single_step_leakage.py --config configs/leakage/wetlab_loso_tiny.yaml --sampling balanced --batch_size 100 --trained --neptune
+python single_step_leakage.py --config configs/leakage/wear_loso_tiny.yaml --sampling balanced --batch_size 100 --neptune 
+python single_step_leakage.py --config configs/leakage/wetlab_loso_tiny.yaml --sampling balanced --batch_size 100 --neptune 
