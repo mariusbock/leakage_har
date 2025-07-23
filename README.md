@@ -14,7 +14,7 @@
 In order to rerun experiments, data as well as pretrained models need to be downloaded from [here](https://uni-siegen.sciebo.de/s/1vSBUw0VGPuQCpm) and placed in the main directory of the repository. 
 
 ## Raw experimental results
-In an effort to encourage future research, we outsource experimental results. The GitHub provides additional confusion matrices as well as a spreadsheet containing an overview of results all experiments (see `experimental_results` folder). Raw experimental results can be downloaded [here](https://uni-siegen.sciebo.de/s/odnmXR6LSyLDhyG).
+In an effort to encourage future research, we outsource experimental results. The GitHub provides a spreadsheet containing an overview of results all experiments (see `experimental_results/results.xlsx`). Raw experimental results (including all confusion matrices) can be downloaded [here](https://uni-siegen.sciebo.de/s/odnmXR6LSyLDhyG).
 
 ## Installation
 Please follow instructions mentioned in the [INSTALL.md](/INSTALL.md) file.

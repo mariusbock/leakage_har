@@ -1,5 +1,6 @@
 logs
 experimental_results/raw
+experimental_results/confusion_matrices
 data
 saved_models
 .idea
